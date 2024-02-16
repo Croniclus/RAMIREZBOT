@@ -9,7 +9,16 @@ const bot = new TelegramBot(token, { polling: true });
 
 // Manejar el comando /start
 bot.onText(/\/start/, (msg) => {
-    bot.sendMessage(msg.chat.id, '¡Hola! Soy un bot que te proporcionará recetas de cocina. Simplemente envía el nombre de un plato o una receta para empezar.');
+    const options = {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['/receta Potato Salad'],
+                ['/receta Bread omelette'],
+                ['/receta Blini Pancakes']
+            ]
+        })
+    };
+    bot.sendMessage(msg.chat.id, '¡Hola! Soy un bot que te proporcionará recetas de cocina. Elige una opción:', options);
 });
 
 // Manejar las consultas de recetas

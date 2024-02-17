@@ -1,3 +1,8 @@
+/**
+ * Módulo para un bot de Telegram que proporciona recetas de cocina.
+ * @module TelegramBot
+ */
+
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
@@ -7,11 +12,15 @@ const token = '6436020466:AAGTR1mfWq1Ln7pqL2ASWLrQRLU1wX8CVYs';
 // Crear un nuevo bot
 const bot = new TelegramBot(token, { polling: true });
 
-// Manejar el comando /start
+/**
+ * Maneja el comando /start.
+ * Muestra un mensaje de bienvenida y opciones de recetas.
+ * @param {Object} msg - El objeto mensaje recibido.
+ */
 bot.onText(/\/start/, (msg) => {
     const options = {
         reply_markup: JSON.stringify({
-            keyboard: [
+            keyboard: [D
                 ['/receta Potato Salad'],
                 ['/receta Bread omelette'],
                 ['/receta Blini Pancakes']
@@ -21,7 +30,12 @@ bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, '¡Hola! Soy un bot que te proporcionará recetas de cocina. Elige una opción:', options);
 });
 
-// Manejar las consultas de recetas
+/**
+ * Maneja las consultas de recetas.
+ * Consulta la API de TheMealDB y muestra la receta del plato especificado.
+ * @param {Object} msg - El objeto mensaje recibido.
+ * @param {Array} match - Array con la cadena de texto que coincide con el patrón.
+ */
 bot.onText(/\/receta (.+)/, async (msg, match) => {
     const dish = match[1];
     try {
